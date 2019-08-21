@@ -211,7 +211,7 @@ with tf.Session() as session:
             print('Epoch: {:<10} | Loss: {:<25} | Test Accuracy {:<20}'.format(epoch, test_loss, test_acc))
 
 
-    save_path = saver.save(session, "./my_model") 
+    save_path = saver.save(session, "./classification") 
     confusion_matrix = []
     X_batch_test, Y_batch_test = test_data.full_batch()
     X_batch_test = np.reshape(X_batch_test, (test_size, 200,200,1))
