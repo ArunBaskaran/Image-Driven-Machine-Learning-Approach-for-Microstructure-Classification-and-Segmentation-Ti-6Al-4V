@@ -292,7 +292,7 @@ lamellae_area_fraction_dict= {}
 for i in range(np.size(predictions)):
 	if(predictions[i]==0):
 		area_frac_duplex=[]
-        dupleimage_image_id=[]
+        duplex_image_id=[]
         filename = 'image_' + str(test_image_id[i]) + '.png'
         image = Image.open(filename).convert('F')
         image = np.copy(np.reshape(np.array(image.getData()), image.size[::-1])/255.)
