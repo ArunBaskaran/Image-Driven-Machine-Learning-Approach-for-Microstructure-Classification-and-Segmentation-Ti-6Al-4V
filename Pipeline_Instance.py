@@ -26,7 +26,7 @@ import cv2
 import numpy as np
 import numpy as np
 import pandas as pd
-from skimage import Dataset, color, io, img_as_float, exposure, measure, morphology, feature
+from skimage import data, color, io, img_as_float, exposure, measure, morphology, feature
 from scipy import ndimage as ndi
 from skimage.morphology import watershed, disk
 from skimage.feature import peak_local_max
@@ -52,8 +52,8 @@ class Dataset:
     
     def random_batch(self, batch_size): 
         set_no = np.random.randint((len(self.image_Dataset) / batch_size))
-        images = self.image_Dataset[set_no*batch_size:(set_no+1)*batch_size]
-        labels = self.label_Dataset[set_no*batch_size:(set_no+1)*batch_size]
+        image_batch = self.image_Dataset[set_no*batch_size:(set_no+1)*batch_size]
+        label_batch = self.label_Dataset[set_no*batch_size:(set_no+1)*batch_size]
         return np.array(image_batch, dtype=np.float32), np.array(label_batch, dtype=np.float32)
 
 #A kernel-based median smoothing function.
@@ -120,7 +120,7 @@ total_labels = df['label']
 for i in range(len(total_labels)):
 	total_labels[i]-=1
 	
-for i in range(1226):
+for i in range(1, 1226):
     if i in random_list:
         filename = 'image_' + str(i) + '.png'
         image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
@@ -355,3 +355,4 @@ for i in range(np.size(predictions)):
         plt.colorbar()
         outfile = 'seg_lamellae_' + str(test_image_id[i]) + '.png'
         plt.savefig(outfile, dpi=100)
+
