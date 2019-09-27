@@ -249,7 +249,7 @@ with tf.Session() as session:
     image_batch_test, label_batch_test = test_Dataset.full_batch()
     image_batch_test = np.reshape(image_batch_test, (test_size, 200,200,1))
     predictions = predict_op.eval(feed_dict = {image: image_batch_test})
-    matrix = session.run(confusion_matriimage_op, feed_dict={image:image_batch_test, label:label_batch_test})
+    matrix = session.run(confusion_matrix, feed_dict={image:image_batch_test, label:label_batch_test})
     confusion_matrix.append(matrix)
     confusion_matrix = sum(confusion_matrix)   
     
@@ -307,6 +307,7 @@ for i in range(np.size(predictions)):
         markers1[image_new < np.median(image_new) - 0.10*np.std(image_new)] = 2
         fig, (ax1) = plt.subplots(1, sharex=True, sharey=True)
         elevation_map = sobel(image_new)
+        #The following implementation of watershed segmentation has been adopted from scikit's documentation example: https://scikit-image.org/docs/dev/user_guide/tutorial_segmentation.html
         segmentation1 = morphology.watershed(elevation_map, markers1)
         segmentation1 = ndi.binary_label_fill_holes(segmentation1 - 1)
         labeled_grains, _ = ndi.label(segmentation1)
