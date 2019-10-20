@@ -74,8 +74,8 @@ import random
 width=200
 height=200
 total_size = 1225
-train_size = 800
-validation_size = 200
+train_size = 1000
+validation_size = 100
 test_size = total_size - train_size - validation_size
 
 import random
@@ -155,7 +155,7 @@ validation_labels = tf.keras.backend.one_hot(validation_labels,3)
 
 model = create_model()
 
-checkpoint_path = "weights/cp.ckpt"
+checkpoint_path = "weights/classification.ckpt"
 checkpoint_dir = os.path.dirname(checkpoint_path)
 
 cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path, save_weights_only=True, verbose=0)
