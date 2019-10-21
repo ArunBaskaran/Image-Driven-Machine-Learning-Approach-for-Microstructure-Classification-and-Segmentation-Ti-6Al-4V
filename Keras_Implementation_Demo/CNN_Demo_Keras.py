@@ -22,19 +22,6 @@ def smooth(img):
     return 0.5*img + 0.5*(
         np.roll(img, +1, axis=0) + np.roll(img, -1, axis=0) +
         np.roll(img, +1, axis=1) + np.roll(img, -1, axis=1) )
-
-
-def convolutional_layer(input_layer, weights, biases, name):
-    with tf.name_scope('conv_layer') as scope:
-        conv_layer = tf.nn.conv2d(input_layer, weights, strides=[1,1,1,1], padding='VALID')
-        conv_layer = tf.add(conv_layer,biases, name='{}_pre_act'.format(name))
-        conv_layer = tf.nn.relu(conv_layer, name=name)
-        return conv_layer
-        
-def output_layer(fc_layer, weights, biases):
-    logits = tf.add(tf.matmul(fc_layer, weights), biases, name='logits')
-    label_hat = tf.nn.softmax(logits, axis=1, name='label_hat')
-    return logits, label_hat
     
 
 
