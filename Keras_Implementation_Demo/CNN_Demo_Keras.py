@@ -16,6 +16,9 @@ from tensorflow.python.keras.layers import Dense
 from tensorflow.python.keras.optimizers import SGD
 from tensorflow.python.keras.layers import Conv2D
 from tensorflow.python.keras.layers import MaxPool2D
+from tensorflow.python.keras import regularizers
+
+
 import os.path
 
 def smooth(img):
@@ -39,7 +42,7 @@ def create_model():
     keras.layers.MaxPool2D((2,2), (2,2), input_shape = (94,94,4), padding = 'valid', name ='P2'),
     keras.layers.Conv2D(12, [3,3],(1,1), input_shape = (47,47,4), kernel_initializer = xavier_init, bias_initializer = zero_init, name ='C3'),  
     keras.layers.Flatten(name ='fc_layer'),
-    keras.layers.Dense(3, activation='softmax'),
+    keras.layers.Dense(3, activation='softmax', kernel_regularizer=regularizers.l1(0.01)),
   ])
 
   model.compile(optimizer='adam',
