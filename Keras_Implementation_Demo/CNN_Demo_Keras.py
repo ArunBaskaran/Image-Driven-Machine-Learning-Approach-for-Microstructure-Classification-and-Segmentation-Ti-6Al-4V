@@ -160,8 +160,10 @@ model = create_model()
 model.load_weights(checkpoint_path)
 
 loss,acc = model.evaluate(test_images,  test_labels, verbose=2, steps = 1)
-print("Accuracy:  {:5.2f}%".format(100*acc))
+print("Accuracy:  {:f}%".format(100*acc))
 
+
+#----Verifying the distribution of predicted classes----#
 y_prob = model.predict(test_images) 
 y_classes = y_prob.argmax(axis=-1)
 print(y_classes)
