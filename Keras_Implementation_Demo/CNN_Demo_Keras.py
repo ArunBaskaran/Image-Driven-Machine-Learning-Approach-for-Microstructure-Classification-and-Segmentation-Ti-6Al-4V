@@ -150,7 +150,7 @@ checkpoint_dir = os.path.dirname(checkpoint_path)
 
 cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path, save_weights_only=True, verbose=0)
 
-model.fit(train_images, train_labels, batch_size=100,  epochs=500, validation_data=(validation_images,validation_labels), steps_per_epoch = 1, validation_steps=1,
+model.fit(train_images, train_labels, batch_size=100,  epochs=2500, validation_data=(validation_images,validation_labels), steps_per_epoch = 1, validation_steps=1,
           callbacks=[cp_callback])  
           
 
