@@ -36,13 +36,13 @@ zero_init = tf.zeros_initializer()  #Initializer for biases
 
 def create_model():
   model = tf.keras.models.Sequential([
-    keras.layers.Conv2D( 2, [5,5], (1,1), input_shape = (200,200,1), kernel_initializer = xavier_init, bias_initializer = zero_init, padding = 'valid', name = 'C1'),  
+    keras.layers.Conv2D( 2, [5,5], (1,1), input_shape = (200,200,1), kernel_initializer = xavier_init, bias_initializer = zero_init, kernel_regularizer=regularizers.l1(0.001), padding = 'valid', name = 'C1'),  
     keras.layers.MaxPool2D((2,2), (2,2), input_shape = (196,196,2),padding = 'valid', name ='P1'),
-    keras.layers.Conv2D(4, [5,5],(1,1), input_shape = (98,98,2), kernel_initializer = xavier_init, bias_initializer = zero_init, name ='C2'),  
+    keras.layers.Conv2D(4, [5,5],(1,1), input_shape = (98,98,2), kernel_initializer = xavier_init, bias_initializer = zero_init, kernel_regularizer=regularizers.l1(0.001), name ='C2'),  
     keras.layers.MaxPool2D((2,2), (2,2), input_shape = (94,94,4), padding = 'valid', name ='P2'),
-    keras.layers.Conv2D(12, [3,3],(1,1), input_shape = (47,47,4), kernel_initializer = xavier_init, bias_initializer = zero_init, name ='C3'),  
+    keras.layers.Conv2D(12, [3,3],(1,1), input_shape = (47,47,4), kernel_initializer = xavier_init, bias_initializer = zero_init, kernel_regularizer=regularizers.l1(0.001), name ='C3'),  
     keras.layers.Flatten(name ='fc_layer'),
-    keras.layers.Dense(3, activation='softmax', kernel_regularizer=regularizers.l1(0.01)),
+    keras.layers.Dense(3, activation='softmax', kernel_regularizer=regularizers.l1(0.001)),
   ])
 
   model.compile(optimizer='adam',
@@ -150,7 +150,7 @@ checkpoint_dir = os.path.dirname(checkpoint_path)
 
 cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path, save_weights_only=True, verbose=0)
 
-model.fit(train_images, train_labels, batch_size=100,  epochs=2500, validation_data=(validation_images,validation_labels), steps_per_epoch = 1, validation_steps=1,
+model.fit(train_images, train_labels, batch_size=200,  epochs=500, validation_data=(validation_images,validation_labels), steps_per_epoch = 1, validation_steps=1,
           callbacks=[cp_callback])  
           
 
