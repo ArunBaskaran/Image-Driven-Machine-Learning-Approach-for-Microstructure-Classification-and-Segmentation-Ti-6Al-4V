@@ -4,8 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 import cv2
-from skimage import exposure
-from skimage import feature
 import pandas as pd
 import tensorflow as tf
 from tensorflow import keras
@@ -30,12 +28,11 @@ def smooth(img):
 
 
 
-
 xavier_init = tf.contrib.layers.xavier_initializer()  #Initializer for weights
 zero_init = tf.zeros_initializer()  #Initializer for biases
 
 def create_model():
-  model = tf.keras.models.Sequential([
+    model = tf.keras.models.Sequential([
     keras.layers.Conv2D( 2, [5,5], (1,1), input_shape = (200,200,1), kernel_initializer = xavier_init, bias_initializer = zero_init, kernel_regularizer=regularizers.l1(0.001), padding = 'valid', name = 'C1'),  
     keras.layers.MaxPool2D((2,2), (2,2), input_shape = (196,196,2),padding = 'valid', name ='P1'),
     keras.layers.Conv2D(4, [5,5],(1,1), input_shape = (98,98,2), kernel_initializer = xavier_init, bias_initializer = zero_init, kernel_regularizer=regularizers.l1(0.001), name ='C2'),  
@@ -45,11 +42,12 @@ def create_model():
     keras.layers.Dense(3, activation='softmax', kernel_regularizer=regularizers.l1(0.001)),
   ])
 
-  model.compile(optimizer='adam',
+    model.compile(optimizer='adam',
                 loss='binary_crossentropy',
                 metrics=['accuracy'])
 
-  return model
+    return model
+
 
 
 df = pd.read_excel('labels.xlsx', header=None, names=['id', 'label'])
@@ -64,7 +62,7 @@ import random
 width=200
 height=200
 total_size = 1225
-train_size = 1000
+train_size = 900
 validation_size = 100
 test_size = total_size - train_size - validation_size
 
@@ -104,7 +102,7 @@ test_labels=[]
 
 for i in range(1, total_size+1):
     if i in train_list:
-        filename = 'image_' + str(i) + '.png'
+        filename = '../Images/image_' + str(i) + '.png'
         image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
         image = cv2.resize(image, dsize=(width, height), interpolation=cv2.INTER_CUBIC)
         image = cv2.blur(image,(5,5))
@@ -112,7 +110,7 @@ for i in range(1, total_size+1):
         train_images.append(image)
         train_labels.append(total_labels[i-1])
     elif i in validation_list:
-        filename = 'image_' + str(i) + '.png'
+        filename = '../Images/image_' + str(i) + '.png'
         image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
         image = cv2.resize(image, dsize=(width, height), interpolation=cv2.INTER_CUBIC)
         image = cv2.blur(image,(5,5))
@@ -120,7 +118,7 @@ for i in range(1, total_size+1):
         validation_images.append(image)
         validation_labels.append(total_labels[i-1])
     else:
-        filename = 'image_' + str(i) + '.png'
+        filename = '../Images/image_' + str(i) + '.png'
         image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
         image = cv2.resize(image, dsize=(width, height), interpolation=cv2.INTER_CUBIC)
         image = cv2.blur(image,(5,5))
@@ -142,16 +140,18 @@ validation_labels = tf.keras.backend.one_hot(validation_labels,3)
 
 #------------Training---------------#
 
-
 model = create_model()
 
 checkpoint_path = "weights/classification.ckpt"
 checkpoint_dir = os.path.dirname(checkpoint_path)
 
+es = tf.keras.callbacks.EarlyStopping(monitor='val_loss', verbose=1, patience = 50, mode='min', restore_best_weights=True)
 cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path, save_weights_only=True, verbose=0)
 
-model.fit(train_images, train_labels, batch_size=200,  epochs=500, validation_data=(validation_images,validation_labels), steps_per_epoch = 1, validation_steps=1,
-          callbacks=[cp_callback])  
+model.fit(train_images, train_labels,  epochs=1500, validation_data=(validation_images,validation_labels), steps_per_epoch = 4, validation_steps=1, callbacks=[es, cp_callback])  
+
+loss,acc = model.evaluate(test_images,  test_labels, verbose=2, steps = 1)
+print("Accuracy:  {:5.2f}%".format(100*acc))
           
 
 
