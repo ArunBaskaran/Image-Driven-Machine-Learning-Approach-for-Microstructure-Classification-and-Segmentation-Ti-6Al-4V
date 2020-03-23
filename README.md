@@ -4,7 +4,7 @@ This is supplementary data to the peer-reviewed publication, [Adaptive character
 
 ### Objective: 
 
-The main aim of this work is to create a pipeline to efficiently extract quantifiable microstructural features using established and well-known image segmentation algorithms, such as HOG and marker-based watershed. Efficiency is obtained by passing the input images through a convolutional neural network that can classify the microstructures into one of three classes with an accuracy of >90%. The architecture used for the network is shown here: ![image](cnnarch.png)
+The primary objective of this work is to implement an algorithm for contextual segmentation of morphological features in a material microstructure dataset. Towards this goal, a task pipeline has been designed, which classifies the micrographs into a target class and subsequently implements label-specific image segmentation algorithm for each image. The classification is performed by training a Convolutional Neural Network. The architecture used for the network is shown here: ![image](cnnarch.png)
 
 
 
@@ -18,5 +18,11 @@ The repository contains the following data:
 
 * Pre-trained weights: A set of pre-trained weights for this CNN has been provided in the Weights repository. 
 
-* Source Code for an instance of the pipeline: A sense for the pipeline can be gained from this code. It first performs the classification step and then performs label-specific segmentation tasks. Snippets of the code that have been adopted from the official OpenCV documentation have been labeled accordingly. 
+### Similar algorithms: 
+
+Other techniques that can used for the purpose of object segmentation include clustering algorithms, semantic segmentation, etc. 
+
+
+
+
 
