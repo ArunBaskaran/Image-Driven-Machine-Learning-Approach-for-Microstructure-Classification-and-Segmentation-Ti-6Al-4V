@@ -18,7 +18,7 @@ The repository contains the following data:
 
 * Pre-trained weights: A set of pre-trained weights for this CNN has been provided in the Weights repository. 
 
-* Pipeline-Demo: A Python implementation of the pipeline has been provided in the CNN-Demo_Keras sub-repository. The source file offers the reader the option to either load pre-trained weights, or play around with the hyper-parameters to train the network from scratch. 
+* Pipeline-Demo: A Python implementation of the pipeline has been provided in the Keras_Implementation_Demo sub-repository. The source file offers the reader the option to either load pre-trained weights, or play around with the hyper-parameters to train the network from scratch. 
 
 ### Similar algorithms: 
 
