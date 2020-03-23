@@ -16,7 +16,7 @@ The repository contains the following data:
 
 * Labels: The labels for each image in the Images1 and Images2 folders have been listed in the files labels.xlsx. Labels 1,2,and 3 refer to lamellae, bi-modal, and martensitic microstructures respectively.
 
-* Pre-trained weights: A set of pre-trained weights for this CNN has been provided in the Weights repository. 
+* Pre-trained weights: A set of pre-trained weights for this CNN has been provided in the Keras_Implementation_Demo repository. 
 
 * Pipeline-Demo: A Python implementation of the pipeline has been provided in the Keras_Implementation_Demo sub-repository. The source file offers the reader the option to either load pre-trained weights, or play around with the hyper-parameters to train the network from scratch. 
 
