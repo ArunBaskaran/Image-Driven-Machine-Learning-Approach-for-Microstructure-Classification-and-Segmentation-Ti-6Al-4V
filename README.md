@@ -1,6 +1,6 @@
 # Image-Driven-Machine-Learning-Approach-for-Microstructure-Classification-and-Segmentation-Ti-6Al-4V
 
-This is supplementary data to the manuscript submitted to the journal, 'Computational Material Science'. 
+This is supplementary data to the peer-reviewed publication, [Adaptive characterization of microstructure dataset using a two stage machine learning approach](https://www.sciencedirect.com/science/article/abs/pii/S0927025620300847). 
 
 ### Objective: 
 
