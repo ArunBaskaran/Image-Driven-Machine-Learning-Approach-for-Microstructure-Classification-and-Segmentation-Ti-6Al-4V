@@ -4,7 +4,7 @@ This is supplementary data to the peer-reviewed publication, [Adaptive character
 
 ### Objective: 
 
-The main aim of this work is to create a pipeline to efficiently extract quantifiable microstructural features using established and well-known image segmentation algorithms, such as HOG and marker-based watershed. Efficiency is obtained by passing the input images through a convolutional neural network that can classify the microstructures into one of three classes with an accuracy of >90%. The architecture used for the network is shown here: ![image](convnet.png)
+The main aim of this work is to create a pipeline to efficiently extract quantifiable microstructural features using established and well-known image segmentation algorithms, such as HOG and marker-based watershed. Efficiency is obtained by passing the input images through a convolutional neural network that can classify the microstructures into one of three classes with an accuracy of >90%. The architecture used for the network is shown here: ![image](cnnarch.png)
 
 
 
