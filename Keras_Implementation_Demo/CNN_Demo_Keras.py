@@ -171,7 +171,7 @@ checkpoint_dir = os.path.dirname(checkpoint_path)
 es = tf.keras.callbacks.EarlyStopping(monitor='val_loss', verbose=1, patience = 50, mode='min', restore_best_weights=True)
 cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path, save_weights_only=True, verbose=0)
 
-model.fit(train_images, train_labels,  epochs=10, validation_data=(validation_images,validation_labels), steps_per_epoch = 4, validation_steps=1, callbacks=[es, cp_callback])  
+model.fit(train_images, train_labels,  epochs=1500, validation_data=(validation_images,validation_labels), steps_per_epoch = 4, validation_steps=1, callbacks=[es, cp_callback])  
 
 loss,acc = model.evaluate(test_images,  test_labels, verbose=2, steps = 1)
 print("Accuracy:  {:5.2f}%".format(100*acc))
