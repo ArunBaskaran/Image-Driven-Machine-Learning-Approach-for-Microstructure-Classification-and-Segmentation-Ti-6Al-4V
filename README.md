@@ -22,7 +22,6 @@
 │   ├── lib_imports.py
 │   ├── main.py
 │   └── model_params.py
-├── tree.txt
 └── weights
     ├── checkpoint
     ├── classification.ckpt.data-00000-of-00001
