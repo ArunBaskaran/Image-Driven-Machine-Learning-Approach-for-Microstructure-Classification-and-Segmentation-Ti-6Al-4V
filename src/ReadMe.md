@@ -7,3 +7,11 @@ The source code in *CNN_Demo_Keras.py* can be used in the following ways:
 * Care should be taken to ensure the correct filepaths for loading the images and weights. 
 
 
+### Usage Instructions
+```
+
+main.py <mode>
+
+```
+
+mode = "train", "load" 
