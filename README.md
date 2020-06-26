@@ -20,6 +20,30 @@ The repository contains the following data:
 
 * Pipeline-Demo: A Python implementation of the pipeline has been provided in the Keras_Implementation_Demo sub-repository. The source file offers the reader the option to either load pre-trained weights, or play around with the hyper-parameters to train the network from scratch. 
 
+### Directory Structure
+
+```
+.
+├── cnnarch.png
+├── Images1
+├── Images2
+├── labels.xlsx
+├── LICENSE
+├── README.md
+├── src
+│   ├── aux_funcs.py
+│   ├── lib_imports.py
+│   ├── main.py
+│   └── model_params.py
+├── tree.txt
+└── weights
+    ├── checkpoint
+    ├── classification.ckpt.data-00000-of-00001
+    └── classification.ckpt.index
+     
+```
+
+
 ### Similar algorithms: 
 
 Other techniques that can used for the purpose of object segmentation include clustering algorithms, semantic segmentation, etc. 
