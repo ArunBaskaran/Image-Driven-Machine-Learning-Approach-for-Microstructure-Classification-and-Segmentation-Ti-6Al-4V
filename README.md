@@ -1,6 +1,34 @@
 # Image-Driven-Machine-Learning-Approach-for-Microstructure-Classification-and-Segmentation-Ti-6Al-4V
 
-This is supplementary data to the peer-reviewed publication, [Adaptive characterization of microstructure dataset using a two stage machine learning approach](https://www.sciencedirect.com/science/article/abs/pii/S0927025620300847). 
+## Table of Contents
+
+1. [Directory Structure](#directory-structure)
+2. [Objective](#objective)
+3. [Publication Link](#publication-link)
+4. [Usage Instructions](#usage-instructions)
+
+### Directory Structure
+
+```
+.
+├── cnnarch.png
+├── Images1
+├── Images2
+├── labels.xlsx
+├── LICENSE
+├── README.md
+├── src
+│   ├── aux_funcs.py
+│   ├── lib_imports.py
+│   ├── main.py
+│   └── model_params.py
+└── weights
+    ├── checkpoint
+    ├── classification.ckpt.data-00000-of-00001
+    └── classification.ckpt.index
+     
+```
+
 
 ### Objective: 
 
@@ -20,11 +48,29 @@ The repository contains the following data:
 
 * Pipeline-Demo: A Python implementation of the pipeline has been provided in the Keras_Implementation_Demo sub-repository. The source file offers the reader the option to either load pre-trained weights, or play around with the hyper-parameters to train the network from scratch. 
 
-### Similar algorithms: 
 
-Other techniques that can used for the purpose of object segmentation include clustering algorithms, semantic segmentation, etc. 
+### Publication Link
+
+This is supplementary data to the peer-reviewed publication, [Adaptive characterization of microstructure dataset using a two stage machine learning approach](https://www.sciencedirect.com/science/article/abs/pii/S0927025620300847). 
+
+### Usage Instructions
+
+The source code in src can be used in the following ways:
 
 
+```
+
+main.py <mode>
+
+```
+
+mode = "train", "load" 
+
+* The complete implementation of the code trains the neural network using 1000 images and 100 images for validation, tests the trained neural network on a held-out dataset of 125 images, and performs label-specific segmentation. mode: "train"
+
+* Alternatively, a set of trained weights have also been provided. These weights have been trained on a dataset of 1000 images, and resulted in an accuracy of 94% on a held-out dest set. The user can test these weights on a randomly selected test set. This might, however, result in the scenario of testing the classifier on images used for training the classifier. The user may also test the trained network on different image datasets. mode: "load"
+
+* Care should be taken to ensure the correct filepaths for loading the images and weights. 
 
 
 
