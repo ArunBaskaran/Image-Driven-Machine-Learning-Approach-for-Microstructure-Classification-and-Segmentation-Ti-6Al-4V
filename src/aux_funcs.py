@@ -30,8 +30,9 @@ def create_model():
     keras.layers.MaxPool2D((2,2), (2,2), input_shape = (94,94,4), padding = 'valid', name ='P2'),
     keras.layers.Conv2D(12, [3,3],(1,1), input_shape = (47,47,4), kernel_initializer = xavier_init, bias_initializer = zero_init, kernel_regularizer=regularizers.l1(0.001), name ='C3'),  
     keras.layers.Flatten(name ='fc_layer'),
-    keras.layers.Dense(3, activation='softmax', kernel_regularizer=regularizers.l1(0.001)),
-  ])
+    keras.layers.Dense(3, activation='softmax', kernel_regularizer=regularizers.l1(0.001)),])
+    return model
+
 
 def load_images_labels():
     df = pd.read_excel('labels.xlsx', header=None, names=['id', 'label'])
@@ -104,6 +105,7 @@ def train_model():
     checkpoint_dir = os.path.dirname(checkpoint_path)
     es = tf.keras.callbacks.EarlyStopping(monitor='val_loss', verbose=1, patience = 50, mode='min', restore_best_weights=True)
     cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path, save_weights_only=True, verbose=0)
+    model.compile(loss=tf.keras.losses.CategoricalCrossentropy(),optimizer='Adam',metrics='accuracy')
     model.fit(train_images, train_labels,  epochs=1500, validation_data=(validation_images,validation_labels), steps_per_epoch = 4, validation_steps=1, callbacks=[es, cp_callback])  
     return model
     
